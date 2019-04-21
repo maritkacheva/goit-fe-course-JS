@@ -27,13 +27,13 @@ let userInput = prompt('Укажите количество дроидов Вы 
 
 if (userInput === null){
   console.log('Отменено пользователем!');
-}else if (Number(userInput) >= 1){
-  console.log(totalPrice = pricePerDroid * userInput)
-    if (Number(totalPrice > credits)) {
+}else {
+  totalPrice = pricePerDroid * userInput;
+  console.log(totalPrice);
+    if (totalPrice > credits) {
       console.log('Недостаточно средств на счету!');
-    } else if (Number(totalPrice <= credits)) {
-      totalPrice = credits - totalPrice;
-      console.log(`Вы купили ${userInput} дроидов, на счету осталось ${totalPrice} кредитов.`);
+    } else {
+      console.log(`Вы купили ${userInput} дроидов, на счету осталось ${credits - totalPrice} кредитов.`);
     } 
 }
 
