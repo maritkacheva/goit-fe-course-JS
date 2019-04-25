@@ -16,10 +16,13 @@ do {
 
 } while(input !== null);
 
-for(const number of numbers) {
-  total += number;
+if(numbers.length){
+  for(let number of numbers) {
+    total += number;   
 }
 console.log(`'Общая сумма чисел равна ${total}'`);
+
+}
 
 
 //task 02
@@ -45,5 +48,5 @@ do{
     alert('У вас закончились попытки, аккаунт заблокирован!');
   }
 
-}while(attemptsLeft > 0)
+}while(attemptsLeft)
 
