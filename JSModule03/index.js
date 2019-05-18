@@ -2,9 +2,9 @@
 
 const logins = ['Mango', 'robotGoogles', 'Poly', 'Aj4x1sBozz', 'qwerty123'];
 
-const isLoginValid = (login) => {return login.length >= 4 && login.length <= 16}
+const isLoginValid = (login) => login.length >= 4 && login.length <= 16;
 
-const isLoginUnique = (logins, login) => {return !logins.includes(login)}
+const isLoginUnique = (logins, login) => !logins.includes(login);
 
 const addLogin = (logins, login) => {
   if (!isLoginValid(login)){
