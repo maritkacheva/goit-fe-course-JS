@@ -31,6 +31,7 @@ const notepad = {
   updateNoteContent(id, updatedContent) {
     for(const note of this.notes){
       if(note.id === id){
+
        Object.assign(note, updatedContent);
        return note;
        
@@ -58,24 +59,16 @@ const notepad = {
   },
   filterNotesByPriority(priority) {
     const priorityArr = [];
-    for(let note of notepad.notes){
+    for(const note of this.notes){
       if(note.priority === priority){
         priorityArr.push(note);
       }
       return priorityArr
     }
-
-    /*
-     * Фильтрует массив заметок по значению приоритета
-     * Если значение priority совпадает с приоритетом заметки - она подходит
-     *
-     * Принимает: приоритет для поиска в свойстве priority заметки
-     * Возвращает: новый массив заметок с подходящим приоритетом
-     */
   },
 };
 
-//поменть на this +  пересмотреть повторяющийся цикл и заменить на функцию
+//пересмотреть повторяющийся цикл и заменить на функцию
 
 
 /*
