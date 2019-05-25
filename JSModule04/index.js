@@ -39,7 +39,7 @@ const notepad = {
     }
   },
   updateNotePriority(id, priority) {
-    for(const note of notepad.notes){
+    for(const note of this.notes){
       if(note.id === id){
         note.priority = priority;
         return note;
@@ -67,8 +67,6 @@ const notepad = {
     }
   },
 };
-
-//пересмотреть повторяющийся цикл и заменить на функцию
 
 
 /*
