@@ -21,51 +21,44 @@ const notepad = {
     return this.notes.push(note);
   },
   deleteNote(id) {
-    for(let i = 0; i < this.notes.length; i += 1){
-      if(this.notes[i].id === id){
-        this.notes.splice(i, 1);
-        return;
-      }  
+    for (let i = 0; i < this.notes.length; i += 1) {
+      if (this.notes[i].id === id) {
+        return this.notes.splice(i, 1);
+      }
     }
   },
   updateNoteContent(id, updatedContent) {
-    for(const note of this.notes){
-      if(note.id === id){
-
-       Object.assign(note, updatedContent);
-       return note;
-       
-      }
-    }
+    const note = this.findNoteById(id);
+    if(!note) return;
+    Object.assign(note, updatedContent);
+    return note;
   },
   updateNotePriority(id, priority) {
-    for(const note of this.notes){
-      if(note.id === id){
-        note.priority = priority;
-        return note;
-      }
-    }
-  },
+    const note = this.findNoteById(id);
+    if(!note) return;
+    note.priority = priority;
+    return note;
+},
   filterNotesByQuery(query) {
     const queryArr = [];
-    for(const note of this.notes){
+    for (const note of this.notes) {
       const queryBody = note.body.toLowerCase();
       const queryTitle = note.title.toLowerCase();
-      if(queryBody.includes(query.toLowerCase()) || queryTitle.includes(query.toLowerCase())){
+      if (queryBody.includes(query.toLowerCase()) || queryTitle.includes(query.toLowerCase())) {
         queryArr.push(note);
-      } 
-      return queryArr;
-    }
-  },
-  filterNotesByPriority(priority) {
-    const priorityArr = [];
-    for(const note of this.notes){
-      if(note.priority === priority){
-        priorityArr.push(note);
       }
-      return priorityArr
     }
+    return queryArr;
   },
+    filterNotesByPriority(priority) {
+  const priorityArr = [];
+  for (const note of this.notes) {
+    if (note.priority === priority) {
+      priorityArr.push(note);
+    }
+  }
+  return priorityArr
+},
 };
 
 
