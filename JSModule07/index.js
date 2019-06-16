@@ -97,7 +97,7 @@ const getUsersByEyeColor = (users, color) => users.filter(user => user.eyeColor 
 console.log(getUsersByEyeColor(users, 'blue')); // [объект Moore Hensley, объект Sharlene Bush, объект Carey Barr]
 
 //task 03
-const getUsersByGender = (users, gender) => users.filter(user => user.gender === gender);
+const getUsersByGender = (users, gender) => users.filter(user => user.gender === gender).map(user => user.name);
 console.log(getUsersByGender(users, 'male')); // [ 'Moore Hensley', 'Ross Vazquez', 'Carey Barr', 'Blackburn Dotson' ]
 
 //task 04
@@ -121,8 +121,8 @@ console.log(getTotalBalance(users)); // 20916
 
 //task 08
 const getUsersByFriend = (users, name) => {
-  const usersByFriend = users.filter(user => user.friends.includes(name));
-  return usersByFriend.map(user => user.name);
+  const usersByFriend = users.filter(user => user.friends.includes(name)).map(user => user.name);
+  return usersByFriend;
 };
 console.log(getUsersByFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
 console.log(getUsersByFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
