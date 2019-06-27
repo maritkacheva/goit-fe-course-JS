@@ -1,9 +1,9 @@
 'use strict';
 
 const PRIORITY_TYPES = {
-  LOW: 0,
-  NORMAL: 1,
-  HIGH: 2,
+  LOW: 'Priority: Low',
+  NORMAL: 'Priority: Normal',
+  HIGH: 'Priority: High'
 };
 
 const ICON_TYPES = {
@@ -210,8 +210,6 @@ const createListItem = note => {
 
   return noteListItem;
 }
-
-console.log(createListItem(notepad)); 
 
 const renderNoteList = (listRef, notes) => {
   const noteListItems = notes.map(note => createListItem(note));
