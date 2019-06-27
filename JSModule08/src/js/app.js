@@ -183,9 +183,14 @@ const createNoteFooter = note => {
   const iconDelete = createIcon();
   iconDelete.textContent = ICON_TYPES.DELETE;
 
-  sectionExpand.append(btnDecrease, iconExpMore, btnIncrease, iconExpLess);
+  btnDecrease.append(iconExpMore);
+  btnIncrease.appendChild(iconExpLess);
+  btnEdit.appendChild(iconEdit);
+  btnDelete.appendChild(iconDelete);
 
-  sectionEdit.append(btnEdit, iconEdit, btnDelete, iconDelete)
+  sectionExpand.append(btnDecrease,  btnIncrease);
+
+  sectionEdit.append(btnEdit, btnDelete)
 
   noteFooter.append(sectionExpand, notePriority, sectionEdit);
 
