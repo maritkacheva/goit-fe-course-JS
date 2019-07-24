@@ -30,7 +30,6 @@ export const handleNoteEditor = event => {
 }
 
 export const handleFilterChange = event => {
-  console.log(event.target.value);
   const searchFormInput = event.target.value;
   const filteredItems = notepad.filterNotesByQuery(searchFormInput);
 
