@@ -51,8 +51,10 @@ export const handleNoteEditor = event => {
 export const handleFilterChange = event => {
   const searchFormInput = event.target.value;
   const filteredItems = notepad.filterNotesByQuery(searchFormInput);
-  const filteredNotes = notesTemplate(filteredItems);
+  const filteredNotes = filteredItems.reduce((acc,el)=> acc + notesTemplate(el),'');
   refs.noteList.innerHTML = '';
+  console.log(filteredItems);
+  console.log(filteredNotes);
 
   refs.noteList.insertAdjacentHTML('beforeend', filteredNotes)
 }
@@ -67,10 +69,12 @@ const removeListItem = target =>{
 export const handleNoteDelete = event => {
 
   const action = event.target.closest('button').dataset.action;
+  console.log(action);
 
   if (event.target.nodeName === 'I' && action === 'delete-note') {
     removeListItem(event.target);
+    notyf.success(NOTIFICATION_MESSAGES.NOTE_DELETED_SUCCESS);
   }
-  notyf.success(NOTIFICATION_MESSAGES.NOTE_DELETED_SUCCESS);
+  
 }
 

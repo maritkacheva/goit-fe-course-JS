@@ -6,5 +6,5 @@ import { handleOpenModal, handleNoteEditor, handleFilterChange, handleNoteDelete
 
 refs.openEditorBtn.addEventListener('click', handleOpenModal)
 refs.submitForm.addEventListener('submit', handleNoteEditor);
-refs.searchForm.addEventListener('input', handleFilterChange);
+refs.inputForm.addEventListener('input', handleFilterChange);
 refs.noteList.addEventListener('click', handleNoteDelete)

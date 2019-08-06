@@ -10,6 +10,7 @@ export const refs = {
   searchForm: document.querySelector('.search-form'),
   saveNoteBtn: document.querySelector('.modal__btn[form="note-editor-form"]'),
   openEditorBtn: document.querySelector('button[data-action="open-editor"]'),
+  inputForm: document.querySelector('.search-form__input')
 }
 
 
