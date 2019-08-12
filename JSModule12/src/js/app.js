@@ -3,7 +3,7 @@ import { Notyf } from 'notyf';
 import MicroModal from 'micromodal';
 import notesTemplate from "../templates/notes.hbs";
 import initialNotes from '../assets/notes.json';
-import { refs } from './view';
+import { refs, createNote } from './view';
 import Notepad from './notepad-model';
 import { PRIORITY_TYPES, NOTIFICATION_MESSAGES, SHORTID } from "./utils/constants";
 import localStorage from "./localStorage";
@@ -11,10 +11,7 @@ import "notyf/notyf.min.css";
 import '../sass/libs/micromodal.scss'
 
 const localStorageNotes = localStorage.load('notes');
-let startNotes = localStorageNotes ? localStorageNotes : initialNotes
-
-console.log(startNotes);
-
+const startNotes = localStorageNotes || initialNotes;
 
 const notyf = new Notyf();
 
@@ -53,37 +50,42 @@ export const handleNoteAdd = event => {
       refs.form.reset();
       MicroModal.close('note-editor-modal');
       localStorage.save('notes', notepad.notes);
+      localStorage.remove('note-title');
+      localStorage.remove('note-body')
     })
 
 }
 
 export const handleFilter = event => {
   const searchFormInput = event.target.value;
-  const filteredItems = notepad.filterNotesByQuery(searchFormInput)
-  const filteredNotes = filteredItems.reduce((acc, el) => acc + notesTemplate(el), '')
-  
-  refs.noteList.innerHTML = '';
-  refs.noteList.insertAdjacentHTML('beforeend', filteredNotes)
 
+  notepad.filterNotesByQuery(searchFormInput)
+    .then(filteredItems => {
+      const filteredNotes = filteredItems.reduce((acc, el) => acc + notesTemplate(el), '')
+    
+      refs.noteList.innerHTML = '';
+      refs.noteList.insertAdjacentHTML('beforeend', filteredNotes)
+    });
 }
 
 const removeListItem = target => {
   const deleteListItem = target.closest('li');
   const id = deleteListItem.dataset.id;
-  notepad.deleteNote(id);
+  
   deleteListItem.remove();
+
+  return notepad.deleteNote(id)
+    .then(notes => {
+      localStorage.save('notes', notes);
+      notyf.success(NOTIFICATION_MESSAGES.NOTE_DELETED_SUCCESS);
+    });
 };
 
 export const handleNoteDelete = event => {
-
   const action = event.target.closest('button').dataset.action;
 
   if (event.target.nodeName === 'I' && action === 'delete-note') {
-    notepad.deleteNote(removeListItem(event.target))
-      .then(() => {
-        localStorage.save('notes', notepad.notes)
-        notyf.success(NOTIFICATION_MESSAGES.NOTE_DELETED_SUCCESS);
-      })
+    removeListItem(event.target);
   }
 }
 

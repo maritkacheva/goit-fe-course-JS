@@ -12,22 +12,24 @@ export default class Notepad {
     }
   }
   saveNote(note) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => {
         this.notes.push(note);
-        resolve(note);
+        return resolve(note);
       }, 300)
     })
 
   };
   deleteNote(id) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => {
         const note = this.findNoteById(id);
-        resolve(this.notes.splice(this.notes.indexOf(note), 1));
-      }, 400)
-    })
 
+        this.notes.splice(this.notes.indexOf(note), 1);
+
+        return resolve(this.notes);
+      }, 400);
+    });
   }
   updateNoteContent(id, updatedContent) {
     const note = this.findNoteById(id);
@@ -42,23 +44,29 @@ export default class Notepad {
     return note;
   }
   filterNotesByQuery(query) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const queryArr = [];
 
-    const queryArr = [];
-    for (const note of this.notes) {
-      const queryBody = note.body.toLowerCase();
-      const queryTitle = note.title.toLowerCase();
-      if (queryBody.includes(query.toLowerCase()) || queryTitle.includes(query.toLowerCase()))
-        queryArr.push(note);
+        for (const note of this.notes) {
+          const queryBody = note.body.toLowerCase();
+          const queryTitle = note.title.toLowerCase();
+
+          if (queryBody.includes(query.toLowerCase()) || queryTitle.includes(query.toLowerCase()))
+            queryArr.push(note);
+        }
+
+        return resolve(queryArr);
+      }, 300);
+    });
+}
+filterNotesByPriority(priority) {
+  const priorityArr = [];
+  for (const note of this.notes) {
+    if (note.priority === priority) {
+      priorityArr.push(note);
     }
-    return queryArr;
   }
-  filterNotesByPriority(priority) {
-    const priorityArr = [];
-    for (const note of this.notes) {
-      if (note.priority === priority) {
-        priorityArr.push(note);
-      }
-    }
-    return priorityArr;
-  }
+  return priorityArr;
+}
 };
