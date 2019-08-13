@@ -10,8 +10,6 @@ import localStorage from "./localStorage";
 import "notyf/notyf.min.css";
 import '../sass/libs/micromodal.scss'
 
-console.log('app init');
-
 const localStorageNotes = localStorage.load('notes');
 const startNotes = localStorageNotes || initialNotes;
 
