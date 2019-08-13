@@ -17,7 +17,7 @@ const notyf = new Notyf();
 
 MicroModal.init();
 
-export const notepad = new Notepad(initialNotes);
+export const notepad = new Notepad(startNotes);
 
 export const addListItem = (listRef, note) => {
   const listItem = notesTemplate(note);
