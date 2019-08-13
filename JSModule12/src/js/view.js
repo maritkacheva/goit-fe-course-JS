@@ -15,5 +15,5 @@ export const refs = {
 
 
 export const createNote = notes => notes.map(note => noteTemplate(note));
-const markup = createNote(initialNotes).join('');
+const markup = createNote(localStorage.load('notes') || initialNotes).join('');
 refs.noteList.insertAdjacentHTML('beforeend', markup)
