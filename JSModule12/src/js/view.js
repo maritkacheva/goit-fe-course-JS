@@ -13,7 +13,6 @@ export const refs = {
   searchFormInput: document.querySelector('.search-form__input')
 }
 
-console.log('hello world');
 export const createNote = notes => notes.map(note => noteTemplate(note));
 const markup = createNote(localStorage.load('notes') || initialNotes).join('');
 refs.noteList.insertAdjacentHTML('beforeend', markup)
