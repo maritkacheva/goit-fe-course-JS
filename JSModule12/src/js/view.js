@@ -1,6 +1,7 @@
 
-import noteTemplate from "../templates/notes.hbs";
+import noteTemplate from '../templates/notes.hbs';
 import initialNotes from '../assets/notes.json';
+import localStorage from "./localStorage";
 
 export const refs = {
   noteList: document.querySelector('.note-list'),
@@ -14,6 +15,6 @@ export const refs = {
 }
 
 
-export const createNote = notes => notes.map(note => noteTemplate(note));
-const markup = createNote(initialNotes).join('');
+export const createNotes = notes => notes.map(note => noteTemplate(note));
+const markup = createNotes(localStorage.load('notes') || initialNotes).join('');
 refs.noteList.insertAdjacentHTML('beforeend', markup)
