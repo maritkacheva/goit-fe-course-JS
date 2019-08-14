@@ -1,8 +1,9 @@
+
 import { Notyf } from 'notyf';
 import MicroModal from 'micromodal';
 import notesTemplate from "../templates/notes.hbs";
 import initialNotes from '../assets/notes.json';
-import { refs, createNotes } from './view';
+import { refs, createNote } from './view';
 import Notepad from './notepad-model';
 import { PRIORITY_TYPES, NOTIFICATION_MESSAGES, SHORTID } from "./utils/constants";
 import localStorage from "./localStorage";
@@ -19,7 +20,6 @@ export const notepad = new Notepad(startNotes);
 
 export const addListItem = (listRef, note) => {
   const listItem = notesTemplate(note);
-  console.log(listItem);
   listRef.insertAdjacentHTML("beforeend", listItem);
 }
 
@@ -43,23 +43,14 @@ export const handleNoteAdd = event => {
   };
 
   notepad.saveNote(submitNoteForm)
-    .then(()=> {
+    .then(() => {
+      addListItem(refs.noteList, submitNoteForm);
+      notyf.success(NOTIFICATION_MESSAGES.NOTE_ADDED_SUCCESS);
+      refs.form.reset();
+      MicroModal.close('note-editor-modal');
       localStorage.save('notes', notepad.notes);
       localStorage.remove('note-title');
-      localStorage.remove('note-body');
-      refs.form.reset();
-      //addListItem(refs.noteList, submitNoteForm);
-
-      notyf.success(NOTIFICATION_MESSAGES.NOTE_ADDED_SUCCESS);
-      MicroModal.close('note-editor-modal');
-
-      const markup = createNotes(notepad.notes);
-      refs.noteList.innerHTML = markup;
-      //refs.noteList.insertAdjacentHTML('beforeend', markup)
-      // const markup = createNotes(notepad.notes);
-
-      // refs.noteList.innerHTML = '';
-      // refs.noteList.insertAdjacentHTML('beforeend', markup)
+      localStorage.remove('note-body')
     })
 
 }
@@ -70,7 +61,7 @@ export const handleFilter = event => {
   notepad.filterNotesByQuery(searchFormInput)
     .then(filteredItems => {
       const filteredNotes = filteredItems.reduce((acc, el) => acc + notesTemplate(el), '')
-
+    
       refs.noteList.innerHTML = '';
       refs.noteList.insertAdjacentHTML('beforeend', filteredNotes)
     });
@@ -79,7 +70,7 @@ export const handleFilter = event => {
 const removeListItem = target => {
   const deleteListItem = target.closest('li');
   const id = deleteListItem.dataset.id;
-
+  
   deleteListItem.remove();
 
   return notepad.deleteNote(id)
