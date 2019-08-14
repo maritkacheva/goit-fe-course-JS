@@ -1,4 +1,3 @@
-
 import { Notyf } from 'notyf';
 import MicroModal from 'micromodal';
 import notesTemplate from "../templates/notes.hbs";

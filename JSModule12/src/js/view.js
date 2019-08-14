@@ -14,7 +14,12 @@ export const refs = {
   searchFormInput: document.querySelector('.search-form__input')
 }
 
+<<<<<<< HEAD
 
 export const createNotes = notes => notes.map(note => noteTemplate(note));
 const markup = createNotes(localStorage.load('notes') || initialNotes).join('');
+=======
+export const createNote = notes => notes.map(note => noteTemplate(note));
+const markup = createNote(localStorage.load('notes') || initialNotes).join('');
+>>>>>>> c4f5b2441473f41a07b8e7d61986beae535e7a6e
 refs.noteList.insertAdjacentHTML('beforeend', markup)
