@@ -51,7 +51,7 @@ export const handleFilter = event => {
 
   notepad.filterNotesByQuery(searchFormInput)
     .then((filteredItems) => {
-      const filteredNotes = filteredItems.reduce((acc, el) => acc + notesTemplate(el), '')
+      const filteredNotes = filteredItems.reduce((acc, el) => acc + noteTemplate(el), '')
     
       refs.noteList.innerHTML = '';
       refs.noteList.insertAdjacentHTML('beforeend', filteredNotes)

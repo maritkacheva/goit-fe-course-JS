@@ -49,16 +49,15 @@ export default class Notepad {
     });
   }
 
-  filterNotesByQuery(query) {
-
+  filterNotesByQuery(query) {   
     return new Promise((resolve) => {
+    api.getNotes().then(serverNotes => {
       setTimeout(() => {
         const queryArr = [];
-
-        for (const note of this._notes) {
+        for (const note of serverNotes) {
           const queryBody = note.body.toLowerCase();
           const queryTitle = note.title.toLowerCase();
-
+          console.log(query);
           if (
             queryBody.includes(query.toLowerCase()) || 
             queryTitle.includes(query.toLowerCase())
@@ -66,8 +65,9 @@ export default class Notepad {
             queryArr.push(note);
         }
         return resolve(queryArr);
-      }, 300);
+      }, 300)});
     });
+    
   }
   filterNotesByPriority(priority) {
     const priorityArr = [];

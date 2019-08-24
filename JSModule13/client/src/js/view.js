@@ -16,6 +16,7 @@ export const refs = {
 
 
 export const createNote = notes => notes.map(note => noteTemplate(note));
+
 getNotes().then(serverNote=>{
   const markup = createNote(serverNote).join('');
   refs.noteList.insertAdjacentHTML('beforeend', markup)
