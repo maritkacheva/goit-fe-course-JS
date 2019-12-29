@@ -36,7 +36,7 @@
     "webpackbar": "^3.1.4"
   },
   "dependencies": {
-    "handlebars": "^4.1.0",
+    "handlebars": "^4.3.0",
     "micromodal": "^0.4.0",
     "notyf": "^3.0.4",
     "shortid": "^2.2.14"
